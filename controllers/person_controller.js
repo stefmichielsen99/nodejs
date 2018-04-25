@@ -1,48 +1,59 @@
 //
-// CRUD operaties op person 
-// 
-let Person = require('../model/Person');
+// CRUD operaties op person
+//
+let Person = require('../model/Person')
+
 let personlist = []
 
 module.exports = {
 
-    createPersonfunction(req,res,next) {
+    createPerson(req, res, next) {
         console.log('personcontroller.createPerson')
-        console.log(req.body)
         const firstname = req.body.firstname
         const lastname = req.body.lastname
         console.log("We got " + firstname + " " + lastname)
-    
-        let newuser = new Person(firstname,lastname)
-        //add to db
-        personlist.push(newuser)
-        res.status(200).json(newuser).end();
+
+        let user = new Person(firstname, lastname)
+        // Add to database
+        personlist.push(user)
+
+        res.status(200).json(user).end();
     },
 
-    readPersonfunction(req ,res, next){
-        
+    readPerson(req, res, next) {
+        res.status(200).json(personlist).end();
     },
 
     updatePerson(req, res, next) {
-        
+        let user = new Person("Robin", "Schellius")
+        res.status(200).json(user).end();
     },
-
+    
     deletePerson(req, res, next) {
-        //Vind de juiste Person om te deleten
+        // vind de juiste person om te deleten
         const id = req.params.id
         console.log('deletePerson id = ' + id)
-        //delete die persoon
-        const removedPerson = personlist.splice(id,1)
-        if (removedPerson.length === 1){
-            res.status(200).json(removedPerson).end()
+
+        // delete die person
+        const removedPerson = personlist.splice(id, 1)
+        if(removedPerson.length === 1) {
+            // gelukt; status = 200
+            res.status(200).json(removedPerson).end();
+        } else {
+            // mislukt; fout -> next(error)
+            let error = {
+                message: "Person was not found"
+            }
+            next(error)
         }
-        //gelukt? status = 200
-        //mislukt? fout -> next(error)
     },
 
     getPersonById(req, res, next) {
-        let user = new Person("Stef","Michielsen")
+
+        let user = new Person("Robin", "Schellius")
         res.status(200).json(user).end();
-    }
-};
+    },
+
+
+}
 
