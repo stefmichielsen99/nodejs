@@ -1,14 +1,13 @@
 
-let express = require('express');
-let routes = express.Router();
-let person_controller = require('../controllers/person_controller')
+let express = require('express')
+let routes = express.Router()
+let personcontroller = require('../controllers/person_controller')
 
+// hier schrijven we router endpoints
+routes.get('/persons', personcontroller.readPerson)
+routes.get('/persons/:id', personcontroller.getPersonById)
+routes.post('/persons', personcontroller.createPerson)
+routes.put('/persons', personcontroller.updatePerson)
+routes.delete('/persons/:id', personcontroller.deletePerson)
 
-//Hier schrijven we router endpoints (GET, POST, PUt ETC.)
-
-routes.get('/persons', person_controller.readPersonfunction)
-routes.post('/persons', person_controller.createPersonfunction)
-routes.delete('/persons', person_controller.deletePerson)
-routes.put('/persons', person_controller.updatePerson)
-
-module.exports = routes;
+module.exports = routes
