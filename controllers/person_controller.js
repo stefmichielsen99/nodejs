@@ -20,13 +20,11 @@ module.exports = {
     },
 
     readPersonfunction(req ,res, next){
-        let user = new Person("Stef","Michielsen")
-        res.status(200).json(personlist).end();
+        
     },
 
     updatePerson(req, res, next) {
-        let user = new Person("Stef","Michielsen")
-        res.status(200).json(user).end();
+        
     },
 
     deletePerson(req, res, next) {
